@@ -1,0 +1,37 @@
+import React, { Component } from 'react';
+import Header from './Header';
+import { connect } from 'react-redux';
+// map global redux state   
+const mapStateToProps = state => ({
+    appName: state.common.appName
+})
+class SignUp extends Component {
+    render() {
+        return (
+            <div>
+                <Header appName={this.props.appName}/>
+                <div className="auth-page">
+                    <div className="container page">
+                    <div className="row">
+                        <div className="col-md-6 offset-md-3 col-xs-12">
+                        <h1 className="text-xs-center">Sign Up</h1>
+                        <p className="text-xs-center"><a className href="#login">Have an account?</a></p>
+                        {/* react-empty: 21 */}
+                        <form>
+                            <fieldset>
+                            <fieldset className="form-group"><input type="text" className="form-control form-control-lg" placeholder="Username" /></fieldset>
+                            <fieldset className="form-group"><input type="email" className="form-control form-control-lg" placeholder="Email" /></fieldset>
+                            <fieldset className="form-group"><input type="password" className="form-control form-control-lg" placeholder="Password" /></fieldset>
+                            <button className="btn btn-lg btn-primary pull-xs-right" type="submit">Sign in</button>
+                            </fieldset>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default connect(mapStateToProps, ()=> ({}))(SignUp);
