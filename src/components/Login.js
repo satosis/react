@@ -2,6 +2,7 @@ import React from 'react';
  import ListErrors from './ListErrors';
  import agent from '../agent';
 import { connect } from 'react-redux';
+import App from '../App';
 
  const mapStateToProps = state => ({ ...state.auth });
 
@@ -28,6 +29,9 @@ class Login extends React.Component {
   render() {
    const { email, password } = this.props;
     return (
+        <div>
+        <App/>
+        
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -75,7 +79,9 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-    );
+  
+        </div>
+      );
   }
 }
  export default connect(mapStateToProps, mapDispatchToProps)(Login);

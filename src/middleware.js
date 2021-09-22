@@ -1,5 +1,7 @@
 'use strict'
 
+import agent from "./agent";
+
 const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {
         store.dispatch({ type:'ASYNC_START',subtype:action.type});
@@ -10,7 +12,7 @@ const promiseMiddleware = store => next => action => {
             },
             error => {
                 action.error = true;
-                action.payload = error.response.body;
+                action.payload = 1;
                 store.dispatch(action);
             }
         );
@@ -19,12 +21,28 @@ const promiseMiddleware = store => next => action => {
     }
   
     next(action);
-  };
+};
   
-  function isPromise(v) {
+function isPromise(v) {
     return v && typeof v.then === 'function';
-  }
+}
   
-  export {
+    const localStorageMiddleware = store => next => action => {
+        if (action.type === 'REGISTER' || action.type === 'LOGIN') {
+        if (!action.error) {
+            window.localStorage.setItem('jwt', action.payload.user.token);
+            agent.setToken(action.payload.user.token);
+        }
+        } else if (action.type === 'LOGOUT') {
+        window.localStorage.setItem('jwt', '');
+        agent.setToken(null);
+        }
+        
+        next(action);
+    };
+    
+    
+export {
+    localStorageMiddleware,
     promiseMiddleware
-  };
+};

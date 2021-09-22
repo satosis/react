@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Banner from './Banner';
+import App from '../../App';
 import MainView from './MainView';
 import agent from '../../agent'
-import Header from '../Header';
 // const Promise = global.Promise;
 // map global redux state   
 const mapStateToProps = state => ({
@@ -20,7 +20,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Header appName={this.props.appName}/>
+                <App/>
             <div className="home-page">
                 <Banner appName={this.props.appName}/>
                 <div className="container page">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
+import App from '../App';
 // map global redux state   
 const mapStateToProps = state => ({
     appName: state.common.appName
@@ -9,7 +10,7 @@ class SignUp extends Component {
     render() {
         return (
             <div>
-                <Header appName={this.props.appName}/>
+                <App/>
                 <div className="auth-page">
                     <div className="container page">
                     <div className="row">
