@@ -6,6 +6,8 @@ export default (state = {}, action) => {
                 inProgress: false,
                 errors: action.error ? action.payload.errors : null
             };
+        case 'LOGIN_PAGE_UNLOADED':
+            return {};
         case 'REGISTER':
             return {
             ...state,

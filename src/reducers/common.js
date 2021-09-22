@@ -36,6 +36,8 @@ const defaultState = {
                 redirectTo: action.error ? null : '/',
                 currentUser: action.error ? null : action.payload.user
             };
+        case 'DELETE_ARTICLE':
+            return {...state,redirectTo:'/'}
     }
     return state;
   };

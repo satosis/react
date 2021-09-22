@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ArticlePreview = props => {
     const article = props.article;
     return (
     <div className="article-preview">
         <div className="article-meta">
-            <a><img src={article.author.image}/></a>
+            <Link to={`article/${article.slug}`}><img src={article.author.image}/></Link>
             <div className="info">
-                <a className="author">{article.author.username}</a>
+                <Link to={`article/${article.slug}`} className="author">{article.author.username}</Link>
                 <span className="date">{new Date(article.createdAt).toDateString()}</span>
             </div>
             <div className="pull-xs-right">
                 <button className="btn btn-sm btn-outline-primary"><i className="fa fa-heart-o"></i> {article.favoritesCount}</button>
             </div>
         </div>
-        <a className="preview" href="">
+        <Link className="preview" to={`article/${article.slug}`}>
             <h1>{article.title}</h1>
             <p>{article.body}</p>
             <span>Read more ...</span>
@@ -29,7 +30,7 @@ const ArticlePreview = props => {
                     })
                 }
             </ul>
-        </a>
+        </Link>
     </div>
     )
 }

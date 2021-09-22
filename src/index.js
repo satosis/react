@@ -11,8 +11,8 @@ import store from './store';
 import Login from './components/Login';
 import './index.css';
 import SignUp from './components/SignUp';
-import App from './App';
 import Settings from './components/Settings';
+import Article from './components/Article';
  
 
 ReactDOM.render(
@@ -23,6 +23,7 @@ ReactDOM.render(
                 <Route path="/login" component={Login}/>
                 <Route path="/signup"  component={SignUp}/>
                 <Route path="/settings" component={Settings}/>
+                <Route path={"/article/:id"} component={Article}/>
             </Switch>
         </Router>
     </Provider>,
