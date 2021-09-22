@@ -18,7 +18,7 @@ class App extends Component {
     componentWillMount() {
         const token = window.localStorage.getItem('jwt');
         if (token) {
-            agent.setToken(token);
+            agent.setToken(token); 
         }
         this.props.onLoad(token ? agent.Auth.current() : null, token);
     }
@@ -26,7 +26,7 @@ class App extends Component {
           if (nextProps.redirectTo) {
             this.context.router.replace(nextProps.redirectTo);
             this.props.onRedirect();
-          }
+          }  
         }
     render() {
         return (

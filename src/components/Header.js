@@ -20,7 +20,7 @@ const LoggedInView = props => {
                 <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="editor">New Post</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="settings">Settings</Link></li>
-                <li className="nav-item"><Link className="nav-link" to={`@${props.currentUser.username}`}><img src={props.currentUser.image} className="user-pic"/>{props.currentUser.userName}</Link></li>
+                <li className="nav-item"><Link className="nav-link" to={`@${props.currentUser.username}`}>{props.currentUser.userName}</Link></li>
             </ul>
         )
     }

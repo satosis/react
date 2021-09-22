@@ -12,7 +12,7 @@ const promiseMiddleware = store => next => action => {
             },
             error => {
                 action.error = true;
-                action.payload = 1;
+                action.payload = error.response.body;
                 store.dispatch(action);
             }
         );
@@ -21,7 +21,7 @@ const promiseMiddleware = store => next => action => {
     }
   
     next(action);
-};
+  };
   
 function isPromise(v) {
     return v && typeof v.then === 'function';

@@ -12,6 +12,7 @@ import Login from './components/Login';
 import './index.css';
 import SignUp from './components/SignUp';
 import App from './App';
+import Settings from './components/Settings';
  
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
                 <Route exact path="/" component={Home} /> 
                 <Route path="/login" component={Login}/>
                 <Route path="/signup"  component={SignUp}/>
+                <Route path="/settings" component={Settings}/>
             </Switch>
         </Router>
     </Provider>,

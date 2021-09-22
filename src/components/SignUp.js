@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import { connect } from 'react-redux';
 import App from '../App';
+import ListErrors from './ListErrors';
+import agent from '../agent';
+import { Link } from 'react-router-dom';
 // map global redux state   
-const mapStateToProps = state => ({
-    appName: state.common.appName
-})
+
+const mapStateToProps = state => ({ ...state.auth });
+
+const mapDispatchToProps = dispatch => ({
+    onChangeEmail: value =>
+        dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
+    onChangePassword: value =>
+        dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
+    onChangeUsername: value =>
+        dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'username', value }),
+    onSubmit: (username, email, password) => {
+        const payload = agent.Auth.register(username, email, password);
+        dispatch({ type: 'REGISTER', payload })
+    }
+});
+
 class SignUp extends Component {
+    constructor() {
+        super();
+        this.changeEmail = event => this.props.onChangeEmail(event.target.value);
+        this.changePassword = event => this.props.onChangePassword(event.target.value);
+        this.changeUsername = event => this.props.onChangeUsername(event.target.value);
+        this.submitForm = (username, email, password) => event => {
+          event.preventDefault();
+          this.props.onSubmit(username, email, password);
+        }
+      }
     render() {
+        const { email, username, password } = this.props;
         return (
             <div>
                 <App/>
@@ -16,14 +42,46 @@ class SignUp extends Component {
                     <div className="row">
                         <div className="col-md-6 offset-md-3 col-xs-12">
                         <h1 className="text-xs-center">Sign Up</h1>
-                        <p className="text-xs-center"><a className href="#login">Have an account?</a></p>
+                        <p className="text-xs-center"><Link className to="/login">Have an account?</Link></p>
                         {/* react-empty: 21 */}
-                        <form>
-                            <fieldset>
-                            <fieldset className="form-group"><input type="text" className="form-control form-control-lg" placeholder="Username" /></fieldset>
-                            <fieldset className="form-group"><input type="email" className="form-control form-control-lg" placeholder="Email" /></fieldset>
-                            <fieldset className="form-group"><input type="password" className="form-control form-control-lg" placeholder="Password" /></fieldset>
-                            <button className="btn btn-lg btn-primary pull-xs-right" type="submit">Sign in</button>
+                        <ListErrors errors={this.props.errors} />
+                       
+              <form onSubmit={this.submitForm(username, email, password)}>
+                <fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="text"
+                      placeholder="Username"
+                      value={this.props.username}
+                      onChange={this.changeUsername} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="email"
+                      placeholder="Email"
+                      value={this.props.email}
+                      onChange={this.changeEmail} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="password"
+                      placeholder="Password"
+                      value={this.props.password}
+                      onChange={this.changePassword} />
+                  </fieldset>
+
+                  <button
+                    className="btn btn-lg btn-primary pull-xs-right"
+                    type="submit"
+                    disabled={this.props.inProgress}>
+                    Sign in
+                  </button>
                             </fieldset>
                         </form>
                         </div>
@@ -35,4 +93,4 @@ class SignUp extends Component {
     }
 }
 
-export default connect(mapStateToProps, ()=> ({}))(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

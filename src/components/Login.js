@@ -16,15 +16,15 @@ import App from '../App';
  });
 
 class Login extends React.Component {
-  constructor() {
-    super();
-    this.changeEmail = event => this.props.onChangeEmail(event.target.value);
-    this.changePassword = event => this.props.onChangePassword(event.target.value);
-    this.submitForm = (email, password) => event => {
-      event.preventDefault();
-      this.props.onSubmit(email, password);
-    };
-  }
+    constructor() {
+        super();
+        this.changeEmail = event => this.props.onChangeEmail(event.target.value);
+        this.changePassword = event => this.props.onChangePassword(event.target.value);
+        this.submitForm = (email, password) => event => {
+            event.preventDefault();
+            this.props.onSubmit(email, password);
+        };
+    }
 
   render() {
    const { email, password } = this.props;
