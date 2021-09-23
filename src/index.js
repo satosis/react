@@ -27,10 +27,10 @@ ReactDOM.render(
                 <Route path="/signup"  component={SignUp}/>
                 <Route path="/settings" component={Settings}/>
                 <Route path={"/article/:id"} component={Article}/>
-                <Route path="@:username" component={Profile}/>
-                <Route path="@:username/favorites" component={ProfileFavorites}/>
+                <Route path={"/user/:username"} component={Profile}/>
+                <Route path={"/users/:username/favorites"} component={ProfileFavorites}/>
                 <Route path="/editor"  component={Editor}/>
-                <Route path={"/editor/:slug"}  component={Editor}/>
+                <Route path={"/editors/:slug"}  component={Editor}/>
             </Switch>
         </Router>
     </Provider>,

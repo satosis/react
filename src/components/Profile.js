@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import App from '../App';
 
 const mapStateToProps = state => ({
   ...state.articleList,
@@ -36,16 +37,16 @@ const EditProfileSettings = props => {
     return null;
   };
   
-  const FollowUserButton = props => {
+const FollowUserButton = props => {
     if (props.isUser) {
-      return null;
+        return null;
     }
   
     let classes = 'btn btn-sm action-btn';
     if (props.user.following) {
-      classes += ' btn-secondary';
+        classes += ' btn-secondary';
     } else {
-      classes += ' btn-outline-secondary';
+        classes += ' btn-outline-secondary';
     }
   
     const handleClick = ev => {
@@ -88,7 +89,7 @@ class Profile extends React.Component {
             <li className="nav-item">
                 <Link
                     className="nav-link active"
-                    to={`@${this.props.profile.username}`}>
+                    to={`/user/${this.props.profile.username}`}>
                     My Articles
                 </Link>
             </li>
@@ -96,7 +97,7 @@ class Profile extends React.Component {
         <li className="nav-item">
           <Link
             className="nav-link"
-            to={`@${this.props.profile.username}/favorites`}>
+            to={`/users/${this.props.profile.username}/favorites`}>
             Favorited Articles
           </Link>
         </li>
@@ -114,51 +115,56 @@ class Profile extends React.Component {
       this.props.profile.username === this.props.currentUser.username;
 
     return (
+        <div>
+        <App/>
+        
       <div className="profile-page">
 
-        <div className="user-info">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
+<div className="user-info">
+  <div className="container">
+    <div className="row">
+      <div className="col-xs-12 col-md-10 offset-md-1">
 
-                <img src={profile.image} className="user-img" />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
+        <img src={profile.image  ?? 'https://static.productionready.io/images/smiley-cyrus.jpg'} className="user-img" />
+        <h4>{profile.username}</h4>
+        <p>{profile.bio}</p>
 
-                <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                  />
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="row">
-
-            <div className="col-xs-12 col-md-10 offset-md-1">
-
-              <div className="articles-toggle">
-                {this.renderTabs()}
-              </div>
-
-                <ArticleList
-                    articles={this.props.articles}
-                    articlesCount={this.props.articlesCount}
-                    currentPage={this.props.currentPage}
-                    onSetPage={this.onSetPage}
-                /> 
-            </div>
-
-          </div>
-        </div>
+        <EditProfileSettings isUser={isUser} />
+        <FollowUserButton
+          isUser={isUser}
+          user={profile}
+          follow={this.props.onFollow}
+          unfollow={this.props.onUnfollow}
+          />
 
       </div>
+    </div>
+  </div>
+</div>
+
+<div className="container">
+  <div className="row">
+
+    <div className="col-xs-12 col-md-10 offset-md-1">
+
+      <div className="articles-toggle">
+        {this.renderTabs()}
+      </div>
+
+        <ArticleList
+            articles={this.props.articles}
+            articlesCount={this.props.articlesCount}
+            currentPage={this.props.currentPage}
+            onSetPage={this.onSetPage}
+        /> 
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+        </div>
     );
   }
 }

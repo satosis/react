@@ -2,7 +2,6 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
-import App from '../App';
 
 const mapStateToProps = state => ({
     ...state.editor
@@ -64,7 +63,10 @@ class Editor extends React.Component {
         tagList: this.props.tagList
       };
 
-      const promise = agent.Articles.create(article);
+      const slug = { slug: this.props.articleSlug };
+      const promise = this.props.articleSlug ?
+        agent.Articles.update(Object.assign(article, slug)) :
+        agent.Articles.create(article);
 
       this.props.onSubmit(promise);
     };
@@ -78,16 +80,28 @@ class Editor extends React.Component {
    * the Editor component if you navigate to '/editor' from '/editor/slug'.
    * To work around this, we need the `componentWillReceiveProps()` hook.
    */
-  
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.slug !== nextProps.params.slug) {
+      if (nextProps.params.slug) {
+        this.props.onUnload();
+        return this.props.onLoad(agent.Articles.get(this.props.match.params.slug));
+      }
+      this.props.onLoad(null);
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.match.params.slug) {
+      return this.props.onLoad(agent.Articles.get(this.props.match.params.slug));
+    }
+    this.props.onLoad(null);
+  }
 
   componentWillUnmount() {
     this.props.onUnload();
   }
   render() {
     return (
-        <div>
-            <App/>
-            
       <div className="editor-page">
         <div className="container page">
           <div className="row">
@@ -166,9 +180,7 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
-   
-        </div>
-     );
+    );
   }
 }
 

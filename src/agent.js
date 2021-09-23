@@ -22,10 +22,10 @@ const Articles = {
       requests.get(`/articles?${limit(10,page)}`),
     del: slug =>
       requests.del(`/articles/${slug}`),
-    byAuth:  (author) =>
-        requests.get(`/articles/author=${encode(author)}&${limit(5,0)}`),
+    byAuthor: (author, page) =>
+        requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
     favoritedBy: author =>
-        requests.get(`/articles/favorited=${encode(author)}&${limit(5,0)}`),
+        requests.get(`/articles?favorited=${encode(author)}&${limit(5,0)}`),
     feed:() =>
         requests.get(`/articles/feed?${limit(5,0)}`),
     byTag: (tag, page) =>

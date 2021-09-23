@@ -40,7 +40,7 @@ class CommentInput extends React.Component {
         </div>
         <div className="card-footer">
           <img
-            src={this.props.currentUser.image ?? 'https://fakeinstas.herokuapp.com/uploads/user/no-user.png'}
+            src={this.props.currentUser.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg'}
             className="comment-author-img" />
           <button
             className="btn btn-sm btn-primary"

@@ -27,7 +27,7 @@ export default (state = {}, action) => {
       case 'ADD_TAG':
         return {
           ...state,
-          tagList: state.tagList.concat([state.tagInput]),
+          tagList:   [...state.tagList,state.tagInput],
           tagInput: ''
         };
       case 'REMOVE_TAG':
