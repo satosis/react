@@ -46,14 +46,14 @@ class SettingsForm extends React.Component {
     }
   
     componentWillMount() {
-      if (this.props.currentUser) {
-        Object.assign(this.state, {
-          image: this.props.currentUser.image || '',
-          username: this.props.currentUser.username,
-          bio: this.props.currentUser.bio,
-          email: this.props.currentUser.email
-        });
-      }
+        if (this.props.currentUser) {
+            Object.assign(this.state, {
+                image: this.props.currentUser.image || '',
+                username: this.props.currentUser.username,
+                bio: this.props.currentUser.bio,
+                email: this.props.currentUser.email
+            });
+        }
     }
   
     componentWillReceiveProps(nextProps) {

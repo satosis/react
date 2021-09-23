@@ -20,7 +20,7 @@ const LoggedInView = props => {
                 <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="editor">New Post</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="settings">Settings</Link></li>
-                <li className="nav-item"><Link className="nav-link" to={`@${props.currentUser.username}`}>{props.currentUser.userName}</Link></li>
+                <li className="nav-item"><Link className="nav-link" to={`@${props.currentUser.username}`}>{props.currentUser.username}</Link></li>
             </ul>
         )
     }
@@ -30,8 +30,10 @@ class Header extends Component {
     render() {
         return (
             <nav className="navbar navbar-light">
+                <Link to="/" className="navbar-brand">
+                {this.props.appName.toLowerCase()}
+            </Link>           
             <div className="container">
-              <Link className="navbar-brand" to="/">{this.props.appName.toLowerCase()}</Link>
               <LoggedOutView currentUser={this.props.currentUser}/>
               <LoggedInView currentUser={this.props.currentUser}/>
               {/* react-empty: 12 */}

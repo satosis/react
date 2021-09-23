@@ -13,6 +13,9 @@ import './index.css';
 import SignUp from './components/SignUp';
 import Settings from './components/Settings';
 import Article from './components/Article';
+import Profile from './components/Profile';
+import ProfileFavorites from './components/ProfileFavorites';
+import Editor from './components/Editor';
  
 
 ReactDOM.render(
@@ -24,6 +27,10 @@ ReactDOM.render(
                 <Route path="/signup"  component={SignUp}/>
                 <Route path="/settings" component={Settings}/>
                 <Route path={"/article/:id"} component={Article}/>
+                <Route path="@:username" component={Profile}/>
+                <Route path="@:username/favorites" component={ProfileFavorites}/>
+                <Route path="/editor"  component={Editor}/>
+                <Route path={"/editor/:slug"}  component={Editor}/>
             </Switch>
         </Router>
     </Provider>,

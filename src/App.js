@@ -23,11 +23,11 @@ class App extends Component {
         this.props.onLoad(token ? agent.Auth.current() : null, token);
     }
     componentWillReceiveProps(nextProps) {
-          if (nextProps.redirectTo) {
+        if (nextProps.redirectTo) {
             this.context.router.replace(nextProps.redirectTo);
             this.props.onRedirect();
-          }  
-        }
+        }  
+    }
     render() {
         return (
             <div>
