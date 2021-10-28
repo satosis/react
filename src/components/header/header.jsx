@@ -8,8 +8,8 @@ import {
     DropdownItem,
     Button,
     UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu
+    DropdownToggle,InputGroupText,
+    DropdownMenu,InputGroup,Input,InputGroupAddon
 } from 'reactstrap';
 
 import profilephoto from '../../assets/images/users/1.jpg';
@@ -66,7 +66,12 @@ const Header = () => {
                 <Collapse className="navbarbg" navbar data-navbarbg="skin1" >
                     <Nav className="ml-auto float-right" navbar>
                         <NavItem>
-                            <a href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/" className="btn btn-danger mr-2" style={{ marginTop: '15px' }}>Upgrade to Pro</a>
+                        <InputGroup  style={{ marginTop: '15px' }}>
+                            <Input placeholder="Search" />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="ti-search"></i></InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
                         </NavItem>
                         {/*--------------------------------------------------------------------------------*/}
                         {/* Start Profile Dropdown                                                         */}

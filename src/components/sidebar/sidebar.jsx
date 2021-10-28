@@ -32,17 +32,18 @@ const Sidebar = (props) => {
                                 return null;
                             }
                             else {
-                                return (
-                                    /*--------------------------------------------------------------------------------*/
-                                    /* Adding Sidebar Item                                                            */
-                                    /*--------------------------------------------------------------------------------*/
-                                    <li className={activeRoute(prop.path) + (prop.pro ? ' active active-pro' : '') + ' sidebar-item'} key={key}>
-                                        <NavLink to={prop.path} className="sidebar-link" activeClassName="active">
-                                            <i className={prop.icon} />
-                                            <span className="hide-menu">{prop.name}</span>
-                                        </NavLink>
-                                    </li>
-                                );
+                                if(prop.status == 1)
+                                    return (
+                                        /*--------------------------------------------------------------------------------*/
+                                        /* Adding Sidebar Item                                                            */
+                                        /*--------------------------------------------------------------------------------*/
+                                        <li className={activeRoute(prop.path) + (prop.pro ? ' active active-pro' : '') + ' sidebar-item'} key={key}>
+                                            <NavLink to={prop.path} className="sidebar-link" activeClassName="active">
+                                                <i className={prop.icon} />
+                                                <span className="hide-menu">{prop.name}</span>
+                                            </NavLink>
+                                        </li>
+                                    );
                             }
                         })}
                     </Nav>
